@@ -5,7 +5,7 @@ import { cors,  } from 'middy/middlewares'
 import { UpdateTodoRequest } from '../../requests/UpdateTodoRequest'
 import { getUserId } from '../utils'
 import { createLogger } from '../../utils/logger'
-import { todoExists, updateTodo } from '../../helpers/todos'
+import { isTodoExist, updateTodo } from '../../helpers/todos'
 
 const logger = createLogger('auth')
 
@@ -15,7 +15,7 @@ export const handler = middy(
     const todoId = event.pathParameters.todoId
     const updatedTodo: UpdateTodoRequest = JSON.parse(event.body)
     // TODO: Update a TODO item with the provided id using values in the "updatedTodo" object
-    const validTodo = await todoExists(todoId)
+    const validTodo = await isTodoExist(todoId)
     if (validTodo.Count == 0) {
       logger.info(`User with id ${userId} performed update no existing todo id ${todoId} `);
       return {

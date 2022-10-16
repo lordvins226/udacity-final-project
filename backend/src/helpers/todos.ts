@@ -52,6 +52,6 @@ export async function deleteTodo(todoId: string): Promise<string> {
     return await todoAccess.deleteTodo(todoId);
 }
 
-export async function todoExists(todoId: string) {
+export async function isTodoExist(todoId: string) {
     return await todoAccess.getTodo(todoId);
 }
