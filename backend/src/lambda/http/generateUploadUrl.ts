@@ -4,7 +4,7 @@ import * as middy from 'middy'
 import { cors } from 'middy/middlewares'
 import { getUserId } from '../utils'
 import { createLogger } from '../../utils/logger'
-import { todoExists } from '../../helpers/todos'
+import { isTodoExist } from '../../helpers/todos'
 import { createAttachmentPresignedUrl } from '../../helpers/attachmentUtils'
 
 const logger = createLogger('auth')
@@ -14,7 +14,7 @@ export const handler = middy(
     const userId = getUserId(event)
     const todoId = event.pathParameters.todoId
     // TODO: Return a presigned URL to upload a file for a TODO item with the provided id
-    const validTodo = await todoExists(todoId)
+    const validTodo = await isTodoExist(todoId)
     if (validTodo.Count == 0) {
       logger.info(`User with id ${userId} performed generate upload url no existing todo id ${todoId}`);
       return {
