@@ -4,7 +4,7 @@ import * as middy from 'middy'
 import { cors } from 'middy/middlewares'
 import { getUserId } from '../utils'
 import { createLogger } from '../../utils/logger'
-import {  deleteTodo, todoExists } from '../../helpers/todos'
+import {  deleteTodo, isTodoExist } from '../../helpers/todos'
 const logger = createLogger('auth')
 
 export const handler = middy(
@@ -12,7 +12,7 @@ export const handler = middy(
     const userId = getUserId(event)
     const todoId = event.pathParameters.todoId
     // TODO: Remove a TODO item by id
-    const todo = await todoExists(todoId)
+    const todo = await isTodoExist(todoId)
     if (todo.Count == 0) {
       logger.info(`User with id ${userId} performed delete no existing todo id ${todoId} `);
       return {
