@@ -37,7 +37,7 @@ export class Todos extends React.PureComponent<TodosProps, TodosState> {
   }
 
   handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ newTodoName: event.target.value })
+      this.setState({ newTodoName: event.target.value })
   }
 
   onEditButtonClick = (todoId: string) => {
